@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
 from courses.models import Course
-
+from .forms import ContactForm
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -21,3 +25,12 @@ class AboutView(TemplateView):
 
 # def about(request):
 #     return render(request, 'about.html')
+
+class ContactView(FormView, SuccessMessageMixin):
+    template_name = 'contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contact')
+    success_message = 'We receivd your request.'
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
