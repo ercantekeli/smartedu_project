@@ -3,19 +3,7 @@ from unicodedata import category
 from django.shortcuts import get_object_or_404, render
 from .models import Course, Category, Tag
 
-# def course_list(request):
-#     courses = Course.objects.all().order_by('-date')
-#     categories = Category.objects.all()
-#     tags = Tag.objects.all()
 
-#     context = {
-#         'courses': courses,
-#         'categories': categories,
-#         'tags': tags,
-
-
-#     }
-#     return render(request, 'courses.html', context)
 
 def course_list(request, category_slug=None, tag_slug=None):
     category_page = None
@@ -62,6 +50,19 @@ def search(request):
     }
     return render(request, 'courses.html', context)
 
+# def course_list(request):
+#     courses = Course.objects.all().order_by('-date')
+#     categories = Category.objects.all()
+#     tags = Tag.objects.all()
+
+#     context = {
+#         'courses': courses,
+#         'categories': categories,
+#         'tags': tags,
+
+
+#     }
+#     return render(request, 'courses.html', context)
 
 
 # def category_list(request, category_slug):
